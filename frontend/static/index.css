@@ -43,6 +43,14 @@ code {
   font-weight: 200;
 }
 
+/* Calculator */
+.cal-container {
+  height: calc(90vh - 100px);
+  margin: 0 auto;
+  padding-top: 100px;
+  width: 420px;
+}
+
 /* Display */
 .display {
   border: 1px solid #c8c8c8;
