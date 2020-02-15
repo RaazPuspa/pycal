@@ -11,3 +11,34 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Header */
+.app-header {
+  background-color: #282c34;
+  height: 10vh;
+  text-align: center;
+}
+
+.app-header-container {
+  margin: 0 auto;
+  max-width: 720px;
+}
+
+.app-header-container p {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.app-title {
+  border-bottom: 2px dashed gray;
+  color: red;
+  font-size: 2.5em;
+  font-weight: 700;
+}
+
+.app-sub-title {
+  color: white;
+  font-size: 1.25em;
+  font-style: italic;
+  font-weight: 200;
+}
