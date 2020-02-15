@@ -14,6 +14,7 @@ class Calculator extends React.Component {
       isResult: false
     }
 
+    this.onClear = this.onClear.bind(this);
     this.onNumberClick = this.onNumberClick.bind(this)
     this.onOperatorClick = this.onOperatorClick.bind(this)
   }
@@ -71,6 +72,16 @@ class Calculator extends React.Component {
   }
 
   onClear() {
+    let display = this.state.display.slice(0, -1).replace(/\s+$/, '')
+
+    if (this.state.isResult) {
+      display = '0'
+      this.setState({ isResult: false, expression: '' })
+    } else if (display.length === 0) {
+      display = '0'
+    }
+
+    this.setState({ display })
   }
 
   onSubmit() {
