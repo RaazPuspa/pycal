@@ -42,3 +42,57 @@ code {
   font-style: italic;
   font-weight: 200;
 }
+
+/* Display */
+.display {
+  border: 1px solid #c8c8c8;
+}
+
+.display input {
+  border: none;
+  color: #101010;
+  cursor: default;
+  font-size: 1.1em;
+  font-weight: lighter;
+  letter-spacing: 0.025em;
+  padding: 5px;
+  text-align: right;
+  white-space: wrap;
+  width: 408px;
+}
+
+.display-main input {
+  font-size: 2.4em;
+  letter-spacing: 0;
+  outline: 0;
+}
+
+/* Key */
+.key {
+  border: 1px solid #c8c8c8;
+  color: #2e2e2e;
+  cursor: pointer;
+  font-size: 1.6em;
+  height: 60px;
+  text-align: center;
+}
+
+.key-number {
+  background-color: #ebebeb;
+}
+
+.key-operator {
+  background-color: #ddc750;
+}
+
+.key-special{
+  background-color: #87b7a9;
+}
+
+.key-single {
+  width: 84px;
+}
+
+.key-double {
+  width: 168px;
+}
