@@ -7,16 +7,67 @@ class Calculator extends React.Component {
   constructor() {
     super();
 
+    this.operators = ['+', '-', '×', '÷'];
     this.state = {
       display: '0',
-      expression: ''
+      expression: '',
+      isResult: false
     }
+
+    this.onNumberClick = this.onNumberClick.bind(this)
+    this.onOperatorClick = this.onOperatorClick.bind(this)
   }
 
   onOperatorClick(event) {
+    let display = this.state.display
+    const operator = event.target.value
+
+    if (this.state.isResult) {
+      this.setState({ expression: '', isResult: false });
+    }
+
+    // do not allow continuous insertion of substract operator
+    if (operator === '-' && display.slice(-1) === '-') {
+      return;
+    }
+
+    // replace last operator unless trying to put negative sign
+    if (operator !== '-' && this.operators.includes(display.slice(-1))) {
+      if (this.operators.includes(display.substr(display.length - 3, 1))) {
+        return
+      }
+
+      display = display.slice(0, -2)
+    }
+
+    if (display.length > 0) {
+      display += ' '
+    }
+
+    this.setState({ display: display += operator })
   }
 
   onNumberClick(event) {
+    let display = this.state.display
+
+    if (this.state.isResult) {
+      display = ''
+      this.setState({ isResult: false, expression: '' });
+    } else if (display === '0') {
+      display = ''
+    }
+
+    if (display.length > 17) {
+      return
+    }
+
+    // append a blank character if number is entered just after operator
+    if (this.operators.includes(display.slice(-1))
+      && !this.operators.includes(display.substr(display.length - 3, 1))) {
+      display += ' '
+    }
+
+    this.setState({ display: display += event.target.value })
   }
 
   onClear() {
