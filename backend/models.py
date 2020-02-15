@@ -1,3 +1,6 @@
+import re
+
+
 class PyCal(object):
 
     def __init__(self, expression, *args, **kw):
@@ -5,6 +8,11 @@ class PyCal(object):
         pass
 
     def calculate(self):
+        regex = re.compile('[0-9. +-×÷]+$')
+
+        if not regex.match(self.expression):
+            raise SyntaxError
+
         expression = self.expression
         expression = expression.replace('×', '*')
         expression = expression.replace('÷', '/')
