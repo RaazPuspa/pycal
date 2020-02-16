@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 import Key from './Key';
 import Display from './Display';
@@ -8,6 +9,7 @@ class Calculator extends React.Component {
     super();
 
     this.operators = ['+', '-', '×', '÷'];
+    this.calculateUrl = '/api/calculate';
     this.state = {
       display: '0',
       expression: '',
@@ -15,6 +17,7 @@ class Calculator extends React.Component {
     }
 
     this.onClear = this.onClear.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
     this.onNumberClick = this.onNumberClick.bind(this)
     this.onOperatorClick = this.onOperatorClick.bind(this)
   }
@@ -85,6 +88,34 @@ class Calculator extends React.Component {
   }
 
   onSubmit() {
+    const display = this.state.display
+    const reducer = (accumulator, operator) => {
+      return accumulator || display.indexOf(operator) > -1
+    }
+
+    if (this.operators.includes(display.slice(-1))) {
+      alert('Invalid expression. Operators must have operands on both sides.')
+    } else if (this.operators.reduce(reducer, false)) {
+      axios.post(this.calculateUrl, { expression: display })
+        .then(response => this.setState({
+          isResult: true,
+          display: response.data.display,
+          expression: response.data.expression
+        }))
+        .catch(error => {
+          let message
+
+          if (error.response.data && error.response.data.message) {
+            message = error.response.data.message
+          } else {
+            message = error.message
+          }
+
+          alert(message)
+        })
+    } else {
+      this.setState({ expression: display, isResult: true })
+    }
   }
 
   render() {
